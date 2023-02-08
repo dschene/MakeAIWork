@@ -18,3 +18,4 @@ env/
 log.txt
 .DS_Store
 scripts/shape/__pycache__
+practica/week1/.ipynb_checkpoints/strings-checkpoint.ipynb
