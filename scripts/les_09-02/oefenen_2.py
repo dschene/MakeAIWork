@@ -16,6 +16,5 @@ for l in i_string:
 print(f"This string has {counter} vowels")
 
 
-#another way of doing this:
-
+#another way of doing this with a list comprehension:
 print(sum([1 for char in i_string if char in "aeoui"]))
