@@ -14,3 +14,8 @@ for l in i_string:
 
 #print out the amount of vowels in the input string
 print(f"This string has {counter} vowels")
+
+
+#another way of doing this:
+
+print(sum([1 for char in i_string if char in "aeoui"]))
