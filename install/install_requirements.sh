@@ -17,6 +17,7 @@ function installWithConda {
     conda install --yes -c conda-forge \
       beautifulsoup4 \
       django \
+      django_rest_framework \
       flask \
       jupyter_core \
       jupyterlab \
@@ -28,7 +29,7 @@ function installWithConda {
       pandas \
       py-cpuinfo \
       pyopengl \
-      pytables  \
+      pytables  \      
       scikit-image \
       scikit-learn \
       scipy \

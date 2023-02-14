@@ -1,5 +1,6 @@
 beautifulsoup4
 django 
+django_rest_framework
 jupyter_core 
 jupyterlab 
 keras 
