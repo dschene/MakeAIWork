@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"length": 6, "width": 1.56, "weight": 360, "deckHeight": [83, 108], "robotArmLength": 1.8, "numberOfSolarPanels": 2, "scienceInstruments": ["seismometer", "heat probe", "radio science experiment"], "image": "../pics/mars.nasa.jpg"}
+=======
+{"length": 6, "width": 1.56, "weight": 360, "deckHeight": [83, 108], "robotArmLength": 1.8, "numberOfSolarPanels": 2, "scienceInstruments": ["seismometer", "heat probe", "radio science experiment"], "image": "../../pics/mars.nasa.jpg"}
+>>>>>>> a08a271fb2c87009dcac5ce46e3abd23e353dbeb
