@@ -5,14 +5,13 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import pickle
-import sys, os
 
 ########################################################
 
-#os.chdir(os.path.dirname(sys.argv[0]))
+#working directory is Project_1 map
 
 #Data ophalen uit database, de op te halen data is dus de output van onze pipeline
-dbName = "../rest_server/medisch_centrum_randstad/data/db.sqlite3"
+dbName = "./rest_server/medisch_centrum_randstad/data/db.sqlite3"
 tableName = "regression_table"
 
 dbConnection = sqlite3.connect(dbName)
@@ -118,5 +117,5 @@ for m in models:
     if m['model name'] == best_model[0]:
         final_model = m
 
-with open('../models/models.pkl', 'wb') as f:
+with open('./models/models.pkl', 'wb') as f:
     pickle.dump(final_model, f)

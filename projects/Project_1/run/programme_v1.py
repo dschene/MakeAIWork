@@ -1,11 +1,10 @@
 import pickle
-import os, sys
 
 ###########################################
 
-#os.chdir(os.path.dirname(sys.argv[0]))
+#working directory is Project_1 map
 
-model = pickle.load(open('../models/models.pkl', 'rb'))
+model = pickle.load(open('./models/models.pkl', 'rb'))
 
 model_variables = model['coefficients']
 
