@@ -77,4 +77,3 @@ df.to_sql('regression_table', con=db_connection, if_exists='replace', index=Fals
 
 #Connectie met database sluiten
 db_connection.close()
-
