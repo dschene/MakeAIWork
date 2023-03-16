@@ -7,42 +7,47 @@ import pickle
 model = pickle.load(open('./models/models.pkl', 'rb'))
 
 model_variables = model['coefficients']
-
 lifespan = model['intercept']
+ranges = model['ranges']
 
 ###########################################
 
+patient_lifespan = lifespan
 
-for v in model_variables.items():
 
-    if v[0] == 'genetic':
-
-        lifespan += int(input('Genetic: ')) * v[1]
-
-    if v[0] == 'exercise':
-
-        lifespan += int(input('Exercise: ')) * v[1]
-
-    if v[0] == 'smoking':
-
-        lifespan += int(input('Smoking: ')) * v[1]
+def get_value(input_range, variable_name, criteria):
+    counter = 0
+    while counter <= 3:
+        try:
+            patient_value = float(input(f"Please enter {variable_name} in {criteria}. This number has to be between {input_range[0]} and {input_range[1]}: "))
+        except ValueError:
+            print('Invalid entry, please try again.')
+            counter += 1
+            continue
+        if input_range[0] <= patient_value <= input_range[1]:
+            return patient_value
+            break
+        else:
+            print('Invalid entry, please try again.')
+            counter += 1
+            continue
     
-    if v[0] == 'alcohol':
+    print('You have provided too many invalid inputs. The programme will now shut down automatically.')
+    exit()
 
-        lifespan += int(input('Alcohol: ')) * v[1]
+for v in model_variables.keys():
+    if v == 'BMI':
 
-    if v[0] == 'sugar':
+        for x in ['mass', 'length']:
+            if x == 'mass':
+                p_mass = get_value(ranges[x], x, ranges[x][2])
+            else:  
+                p_height = get_value(ranges[x], x, ranges[x][2])  
         
-        lifespan += int(input('Sugar: ')) * v[1]
-
-    if v[0] == 'BMI':
-
-        weight = int(input('Mass: '))
-        length = int(input('Length: '))
-        bmi = weight / (length * 100)**2
-
-        lifespan += (bmi * v[1])
+        
+        lifespan += (p_mass / (p_height * 100)**2) * model_variables['BMI']
+    else:
+        lifespan += (get_value(ranges[v], v, ranges[v][2])) * model_variables[v]
 
 print('\n')
-
-print(f"Estimated lifespan is {round(lifespan, 2)}")
+print(f"Estimated lifespan of patient is {round(lifespan, 2)}.")
