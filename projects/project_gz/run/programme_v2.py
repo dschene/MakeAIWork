@@ -2,8 +2,6 @@ import pickle
 
 ###########################################
 
-#working directory is Project_1 map
-
 model = pickle.load(open('../models/models_2.pkl', 'rb'))
 
 #for v in model.items():

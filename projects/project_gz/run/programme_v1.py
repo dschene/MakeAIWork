@@ -2,8 +2,6 @@ import pickle
 
 ###########################################
 
-#working directory is Project_1 map
-
 model = pickle.load(open('../models/models.pkl', 'rb'))
 
 model_variables = model['coefficients']
