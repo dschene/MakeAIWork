@@ -100,7 +100,6 @@ n = 1
 for model in models:
     model['model name'] = n
     n += 1
-    print(model['coefficients'])
 
 ########################################################
 
