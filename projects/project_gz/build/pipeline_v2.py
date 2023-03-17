@@ -5,10 +5,8 @@ import sys, os
 
 ######################################
 
-#working directory is Project_1 map
-
 #relatief pad naar database
-db_path = './rest_server/medisch_centrum_randstad/data/db.sqlite3'
+db_path = '../rest_server/medisch_centrum_randstad/data/db.sqlite3'
 
 ######################################
 
@@ -76,5 +74,3 @@ df.to_sql('regression_table_2', con=db_connection, if_exists='replace', index=Fa
 
 #Connectie met database sluiten
 db_connection.close()
-
-print(df.corr())

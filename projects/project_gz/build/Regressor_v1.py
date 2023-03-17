@@ -8,11 +8,9 @@ import pickle
 
 ########################################################
 
-#working directory is Project_1 map
-
 #Data ophalen uit database, de op te halen data is dus de output van onze pipeline
-dbName = "./rest_server/medisch_centrum_randstad/data/db.sqlite3"
-tableName = "regression_table_2"
+dbName = "../rest_server/medisch_centrum_randstad/data/db.sqlite3"
+tableName = "regression_table"
 
 dbConnection = sqlite3.connect(dbName)
 
@@ -22,18 +20,19 @@ df = pd.read_sql_query(f"SELECT * FROM {tableName}", dbConnection)
 #We sluiten de connectie
 dbConnection.close()
 
+#Selecteren van relevante columns 
+df_updated = df[['genetic', 'exercise', 'smoking', 'alcohol', 'sugar', 'BMI', 'lifespan']]
 
 ########################################################
 
 #Hier kunnen we verschillende subsets van de data maken, om zo voor elke subset een model te trainen en onderling
 #te vergelijken
 
-#alle variabelen
-v1 = ['exercise', 'smoking', 'alcohol', 'sugar', 'BMI']
-#enkel de 3 variabelen met de hoogste correlatiewaardes
-v2 = ['exercise', 'smoking', 'BMI'] 
-#enkel de 2 sterkst correlerende variabelen
-v3 = ['smoking', 'exercise']
+v1 = ['genetic', 'exercise', 'smoking', 'alcohol', 'sugar', 'BMI']
+v2 = ['genetic', 'exercise', 'smoking', 'BMI'] 
+v3 = ['genetic', 'smoking']
+v4 = ['genetic', 'exercise', 'smoking']
+v5 = ['genetic', 'exercise', 'smoking', 'alcohol', 'sugar']
 
 range_dict = {
     'genetic':(40, 120, 'years'),
@@ -46,7 +45,7 @@ range_dict = {
     'sugar':(0,15, 'cubes per day')
 }
 
-version_list = [v1, v2, v3]
+version_list = [v1, v2, v3, v4, v5]
 
 ########################################################
 
@@ -59,7 +58,7 @@ models = []
 def train_model(dataframe, version):
     
     x = dataframe[version]
-    y = dataframe.loc[:, 'age_diff']
+    y = dataframe.loc[:, 'lifespan']
     
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.3, random_state = 42)
     
@@ -89,9 +88,10 @@ def train_model(dataframe, version):
     }
 
 
+
 #Voor elke versie van de data een model trainen:
 for v in version_list:
-    models.append(train_model(df, v))
+    models.append(train_model(df_updated, v))
 
 #Hele omslachtige manier om een versienaam aan elk model te geven
 n = 1
@@ -108,10 +108,5 @@ for m in models:
     if m['model name'] == best_model[0]:
         final_model = m
 
-with open('./models/models_2.pkl', 'wb') as f:
+with open('../models/models.pkl', 'wb') as f:
     pickle.dump(final_model, f)
-
-
-for m in models:
-    print(m)
-    print('\n')

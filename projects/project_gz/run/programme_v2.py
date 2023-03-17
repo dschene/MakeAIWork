@@ -4,7 +4,7 @@ import pickle
 
 #working directory is Project_1 map
 
-model = pickle.load(open('./models/models_2.pkl', 'rb'))
+model = pickle.load(open('../models/models_2.pkl', 'rb'))
 
 #for v in model.items():
 #    print(v)
@@ -55,11 +55,11 @@ for v in model_variables.keys():
         first_values[v] = dummy_v
 
 if b_1 < 0:
-    print(f'Based on the provided data, this person will on average live {round(b_1)} years less because of their current lifestyle.')
+    print(f'Based on the provided data, this person will on average live {abs(round(b_1))} years less because of their current lifestyle.')
 elif b_1 > 0:
     print(f'Based on the provided data, this person will on average live {round(b_1)} years longer because of their current lifestyle.')
 
-y_or_n = input("Would you like to provide another set of values? Enter 'y' for yes, 'n' for no.")
+y_or_n = input("Would you like to provide another set of values for comparison? Enter 'y' for yes, 'n' for no: ")
 
 if y_or_n == 'y':
     print('You can now enter the second set of variables.')
@@ -86,5 +86,5 @@ else:
 if b_1 < b_2:
     print(f'The lifestyle changes provided the second time will on average result in a lifespan increase of {round(b_2 - b_1)} years.')
 else:
-    print(f'The lifestyle changes provided the second time will on average result in a lifespan decrease of {round(b_1 - b_2)} years.')
+    print(f'The lifestyle changes provided the second time will on average result in a lifespan decrease of {abs(round(b_1 - b_2))} years.')
 
